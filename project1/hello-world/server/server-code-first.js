@@ -3,6 +3,13 @@ import { startStandaloneServer } from "@apollo/server/standalone"
 import { queryType, makeSchema } from "nexus"
 //code first approach
 
+/**
+ * Advantages of "Code-First"
+ *   - Avoid inconsistencies in impl. vs schema
+ *   - easier to split into modules
+ *   - nexus ensures type safety
+ */
+
 //import queryType from nexus
 const Query = queryType({
     //definition takes an argument called type (used as "t" conventionally)
