@@ -1,5 +1,6 @@
 type Query {
     jobs: [Job!] # syntax for passing array (Add array brackets around value)
+    job(id: ID!): Job # pass id as variable to look for specific job
 }
 
 type Company {

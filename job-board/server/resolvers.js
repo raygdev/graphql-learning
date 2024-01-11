@@ -1,5 +1,5 @@
 import { getCompany } from "./db/companies.js"
-import { getJobs } from "./db/jobs.js"
+import { getJob, getJobs } from "./db/jobs.js"
 
 export const resolvers = {
     Query: {
@@ -7,7 +7,10 @@ export const resolvers = {
         jobs: async () => {
             const jobs = await getJobs()
             return jobs
-        }
+        },
+        //first argument is root, not used here. Second argument is arguments object
+        //passes the args from the defined type args.id is what we are looking for in this case
+        job: async (_root, args) => getJob(args.id)
     },
     Job: {
         /**
