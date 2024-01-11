@@ -10,7 +10,8 @@ export const resolvers = {
         },
         //first argument is root, not used here. Second argument is arguments object
         //passes the args from the defined type args.id is what we are looking for in this case
-        job: async (_root, args) => getJob(args.id)
+        job: async (_root, args) => await getJob(args.id),
+        company: async (_root, args) => await getCompany(args.id)
     },
     Job: {
         /**
