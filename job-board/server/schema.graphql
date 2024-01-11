@@ -1,6 +1,12 @@
 type Query {
     jobs: [Job!] # syntax for passing array (Add array brackets around value)
 }
+
+type Company {
+    id: ID!
+    name: String!
+    description: String
+}
 # custom query Job passed to main query 
 
 # exclamation denotes non-nullable fields
@@ -18,6 +24,7 @@ type Job {,
     id: ID!
     title: String!
     description: String
+    company: Company!
     """The __date__ when the job was published, in ISO-8601 format. E.g. `2022-12-31`."""
     date:String!
 }
