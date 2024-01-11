@@ -21,9 +21,13 @@ export async function getJobs() {
 }
 
 export async function getJob(id) {
+    //passing directly as a string might let unescaped characters in.
+    //query ($id: ID!) means that $id is the variable and it is a non-nullable
+    //id that is expected
+    //then passed to job(id: $id) as the id (variable) to be used.
   const query = gql`
-    query {
-      job(id: "${id}") {
+    query ($id: ID!){
+      job(id: $id) {
         id
         title
         description
@@ -35,6 +39,8 @@ export async function getJob(id) {
       }
     }
   `
-  const data = await client.request(query)
+  //id is passed in an object for the query
+  //second argument is variables object. 
+  const data = await client.request(query, { id })
   return data.job
 }
