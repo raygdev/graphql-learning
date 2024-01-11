@@ -1,0 +1,23 @@
+type Query {
+    jobs: [Job!] # syntax for passing array (Add array brackets around value)
+}
+# custom query Job passed to main query 
+
+# exclamation denotes non-nullable fields
+
+# ID is one of 5 (Int, Boolean, Float, ID, String) built in scalar types from GraphQL
+
+# custom scalars can be made.
+
+# documentation comments start and end with 3 double quotes. double underscores will make a word bold
+
+"""
+Represents a job ad posted to our board
+"""
+type Job {,
+    id: ID!
+    title: String!
+    description: String
+    """The __date__ when the job was published, in ISO-8601 format. E.g. `2022-12-31`."""
+    date:String!
+}
