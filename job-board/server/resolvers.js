@@ -17,6 +17,7 @@ export const resolvers = {
     Company: {
         jobs: (company) => getJobsByCompany(company.id)
     },
+    
     Job: {
         /**
          * resolver functions take multiple arguments
