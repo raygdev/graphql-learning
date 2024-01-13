@@ -8,6 +8,7 @@ type Mutation {
     # define the input for the mutation
     createJob(input: CreateJobInput!): Job
     deleteJob(id: ID!): Job
+    updateJob(input: UpdateJob!): Job
 }
 
 type Company {

@@ -1,6 +1,6 @@
 import { GraphQLError } from "graphql"
 import { getCompany } from "./db/companies.js"
-import { getJob, getJobs, getJobsByCompany, createJob, deleteJob } from "./db/jobs.js"
+import { getJob, getJobs, getJobsByCompany, createJob, deleteJob, updateJob } from "./db/jobs.js"
 
 export const resolvers = {
     Query: {
@@ -45,6 +45,18 @@ export const resolvers = {
                     extensions: { code: "NOT_FOUND"}
                 })
             }
+        },
+
+        updateJob: async (_root, { input }) => {
+            try {
+              const updatedJob = await updateJob(input)
+              return updatedJob
+            } catch (e){
+                throw new GraphQLError(e.message, {
+                    extensions: { code: "NOT_FOUND" }
+                })
+            }
+
         }
     },
 
