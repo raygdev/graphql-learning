@@ -85,3 +85,15 @@ export const resolvers = {
         company: async (job) => await getCompany(job.companyId)
     }
 }
+
+function unauthorizedErorr(message) {
+    return new GraphQLError(message, {
+        extensions: { code: "UNAUTHORIZED" }
+    })
+}
+
+function notFoundError(message) {
+    return new GraphQLError(message, {
+        extensions: { code: "NOT_FOUND" }
+    })
+}
