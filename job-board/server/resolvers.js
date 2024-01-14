@@ -36,9 +36,7 @@ export const resolvers = {
         //and third argument is context
         createJob: (_root, { input: { title, description } }, { user }) => {
             if(!user) {
-                throw new GraphQLError("Missing Authentication", {
-                    extensions: { code: "UNAUTHORIZED" }
-                })
+                throw unauthorizedErorr("Missing Authentication")
             }
             const companyId = user.companyId
             return createJob({ title, description, companyId })
