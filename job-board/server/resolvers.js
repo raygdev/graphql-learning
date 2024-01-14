@@ -32,11 +32,18 @@ export const resolvers = {
     },
 
     Mutation: {
-        createJob: (_root, { input: { title, description } }) => {
-            const companyId = "FjcJCHJALA4i"
+        //first argument is the root or source, second argument is args,
+        //and third argument is context
+        createJob: (_root, { input: { title, description } }, { user }) => {
+            if(!user) {
+                throw new GraphQLError("Missing Authentication", {
+                    extensions: { code: "UNAUTHORIZED" }
+                })
+            }
+            const companyId = user.companyId
             return createJob({ title, description, companyId })
         },
-        deleteJob: async (_root, { id }) => {
+        deleteJob: async (_root, { id }, { auth }) => {
             try {
               const deletedJob = await deleteJob(id)
               return deletedJob
