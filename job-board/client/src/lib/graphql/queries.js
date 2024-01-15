@@ -105,7 +105,14 @@ export async function createJob({ title, description }) {
   `
   const result = await apolloClient.mutate({
     mutation,
-    variables: { input: { title, description }}
+    variables: { input: { title, description }},
+    update: (cache, { data }) => {
+      cache.writeQuery({
+        query: jobByIdQuery,
+        variables: { id: data.job.id},
+        data
+      })
+    }
   })
   return result.data.job
 }
