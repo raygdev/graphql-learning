@@ -1,17 +1,30 @@
-import { ApolloClient, gql, InMemoryCache } from '@apollo/client'
-import { GraphQLClient } from "graphql-request"
+import { ApolloClient, gql, InMemoryCache, concat, createHttpLink, ApolloLink } from '@apollo/client'
 import { getAccessToken } from '../auth'
 
-const client = new GraphQLClient('http://localhost:9000/graphql', {
-  headers: () => {
-    const accessToken = getAccessToken()
-    if(accessToken) {
-      return {
-        "Authorization": `Bearer ${accessToken}`
-      }
-    }
-    return {}
+// const client = new GraphQLClient('http://localhost:9000/graphql', {
+//   headers: () => {
+//     const accessToken = getAccessToken()
+//     if(accessToken) {
+//       return {
+//         "Authorization": `Bearer ${accessToken}`
+//       }
+//     }
+//     return {}
+//   }
+// })
+const httpLink = createHttpLink({
+  uri: 'http://localhost:9000/graphql'
+})
+
+
+const authLink = new ApolloLink((operation, forward) => {
+  const accessToken = getAccessToken()
+  if(accessToken) {
+    operation.setContext({
+      headers: { "Authorization": `Bearer ${accessToken}`}
+    })
   }
+  return forward(operation)
 })
 
 const apolloClient = new ApolloClient({
