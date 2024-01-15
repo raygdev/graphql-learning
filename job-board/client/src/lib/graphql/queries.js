@@ -54,8 +54,16 @@ export async function getJob(id) {
           id
           name
         }
+  }
+`
+
+const jobByIdQuery = gql`
+    query ($id: ID!){
+      job(id: $id) {
+       ...JobDetail
       }
     }
+    ${jobDetailsFragment}
   `
   const result = await apolloClient.query({
     query,
