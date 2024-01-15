@@ -1,17 +1,6 @@
 import { ApolloClient, gql, InMemoryCache, concat, createHttpLink, ApolloLink } from '@apollo/client'
 import { getAccessToken } from '../auth'
 
-// const client = new GraphQLClient('http://localhost:9000/graphql', {
-//   headers: () => {
-//     const accessToken = getAccessToken()
-//     if(accessToken) {
-//       return {
-//         "Authorization": `Bearer ${accessToken}`
-//       }
-//     }
-//     return {}
-//   }
-// })
 const httpLink = createHttpLink({
   uri: 'http://localhost:9000/graphql'
 })
@@ -46,17 +35,11 @@ export async function getJobs() {
         }
       }
     `
-    // const data = await client.request(query)
-    // return data.jobs
     const result = await apolloClient.query({ query })
     return result.data.jobs
 }
 
 export async function getJob(id) {
-    //passing directly as a string might let unescaped characters in.
-    //query ($id: ID!) means that $id is the variable and it is a non-nullable
-    //id that is expected
-    //then passed to job(id: $id) as the id (variable) to be used.
   const query = gql`
     query ($id: ID!){
       job(id: $id) {
@@ -71,10 +54,6 @@ export async function getJob(id) {
       }
     }
   `
-  //id is passed in an object for the query
-  //second argument is variables object. 
-  // const data = await client.request(query, { id })
-  // return data.job
   const result = await apolloClient.query({
     query,
     variables: { id }
@@ -97,9 +76,6 @@ export async function getCompany(id) {
       }
     }
   `
-
-  // const data = await client.request(query, { id })
-  // return data.company
   const result = await apolloClient.query({
     query,
     variables: { id }
