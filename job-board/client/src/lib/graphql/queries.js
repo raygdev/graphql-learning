@@ -35,7 +35,10 @@ export async function getJobs() {
         }
       }
     `
-    const result = await apolloClient.query({ query })
+    const result = await apolloClient.query({
+      query,
+      fetchPolicy: `network-only`
+    })
     return result.data.jobs
 }
 
