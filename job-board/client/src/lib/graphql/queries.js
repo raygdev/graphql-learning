@@ -28,8 +28,8 @@ const authLink = new ApolloLink((operation, forward) => {
 })
 
 const apolloClient = new ApolloClient({
-  uri: 'http://localhost:9000/graphql',
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
+  link: concat(authLink, httpLink)
 })
 
 export async function getJobs() {
