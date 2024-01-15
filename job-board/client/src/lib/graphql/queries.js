@@ -42,10 +42,8 @@ export async function getJobs() {
     return result.data.jobs
 }
 
-export async function getJob(id) {
-  const query = gql`
-    query ($id: ID!){
-      job(id: $id) {
+const jobDetailsFragment = gql`
+  fragment JobDetail on Job {
         id
         title
         description
