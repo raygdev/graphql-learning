@@ -63,9 +63,11 @@ const jobByIdQuery = gql`
     }
     ${jobDetailsFragment}
   `
+  
+export async function getJob(id) {
   const result = await apolloClient.query({
-    query,
-    variables: { id }
+    query: jobByIdQuery,
+    variables: { id },
   })
   return result.data.job
 }
@@ -93,18 +95,14 @@ export async function getCompany(id) {
 }
 
 export async function createJob({ title, description }) {
-  //job: createJob is syntax for an alias... the mutation returns a job
   const mutation = gql`
     mutation CreateJob($input: CreateJobInput!) {
       job: createJob(input: $input) {
-        id
+        ...JobDetail
       }
     }
+    ${jobDetailsFragment}
   `
-  // const data = await client.request(mutation, {
-  //   input: { title, description } 
-  // })
-  // return data.job
   const result = await apolloClient.mutate({
     mutation,
     variables: { input: { title, description }}
