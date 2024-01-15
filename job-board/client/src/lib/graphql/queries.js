@@ -33,8 +33,10 @@ export async function getJobs() {
         }
       }
     `
-    const data = await client.request(query)
-    return data.jobs
+    // const data = await client.request(query)
+    // return data.jobs
+    const result = await apolloClient.query({ query })
+    return result.data.jobs
 }
 
 export async function getJob(id) {
@@ -58,8 +60,13 @@ export async function getJob(id) {
   `
   //id is passed in an object for the query
   //second argument is variables object. 
-  const data = await client.request(query, { id })
-  return data.job
+  // const data = await client.request(query, { id })
+  // return data.job
+  const result = await apolloClient.query({
+    query,
+    variables: { id }
+  })
+  return result.data.job
 }
 
 export async function getCompany(id) {
@@ -78,8 +85,13 @@ export async function getCompany(id) {
     }
   `
 
-  const data = await client.request(query, { id })
-  return data.company
+  // const data = await client.request(query, { id })
+  // return data.company
+  const result = await apolloClient.query({
+    query,
+    variables: { id }
+  })
+  return result.data.company
 }
 
 export async function createJob({ title, description }) {
@@ -91,8 +103,13 @@ export async function createJob({ title, description }) {
       }
     }
   `
-  const data = await client.request(mutation, {
-    input: { title, description } 
+  // const data = await client.request(mutation, {
+  //   input: { title, description } 
+  // })
+  // return data.job
+  const result = await apolloClient.mutate({
+    mutation,
+    variables: { input: { title, description }}
   })
-  return data.job
+  return result.data.job
 }
