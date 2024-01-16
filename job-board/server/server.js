@@ -21,15 +21,15 @@ async function getContext({ req }) {
   const companyLoader = createCompanyLoader()
   const context = { companyLoader }
   if(req.auth) {
-    const user = await getUser(req.auth.sub)
-    return { user }
+    context.user = await getUser(req.auth.sub)
+    
   }
   //getContext passed to context property for options to apolloMiddleware
   //accepts req and res from express.
   //the auth property comes from express-jwt package and passes the decoded
   //value of the token down the middleware chain
   // return { auth: req.auth }
-  return {}
+  return context
 }
 
 const apolloServer = new ApolloServer({ typeDefs, resolvers })
