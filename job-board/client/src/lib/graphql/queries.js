@@ -90,6 +90,15 @@ export const jobByIdQuery = gql`
     }
     ${jobDetailsFragment}
   `
+
+export const createJobMutation = gql`
+    mutation CreateJob($input: CreateJobInput!) {
+      job: createJob(input: $input) {
+        ...JobDetail
+      }
+    }
+    ${jobDetailsFragment}
+  `
   
 export async function getJob(id) {
   const result = await apolloClient.query({
