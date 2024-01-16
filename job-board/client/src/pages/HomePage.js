@@ -28,8 +28,10 @@ function HomePage() {
           onClick={() => setCurrentPage(currentPage - 1)}>
           Previous
         </button>
-        <span> {currentPage} </span>
-        <button onClick={() => setCurrentPage(currentPage + 1)}>
+        <span> {`${currentPage} of ${totalPages}`} </span>
+        <button
+          disabled={currentPage === totalPages}
+          onClick={() => setCurrentPage(currentPage + 1)}>
           Next
         </button>
       </div>
