@@ -64,6 +64,7 @@ export const getJobsQuery = gql`
           name
         }
       }
+      totalCount
     }
   }
   `
