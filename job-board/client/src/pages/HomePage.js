@@ -14,6 +14,7 @@ function HomePage() {
   if(error) {
     return <div className='has-text-danger'>Something went wrong</div>
   }
+  console.log(jobs)
   return (
     <div>
       <h1 className="title">
@@ -28,7 +29,7 @@ function HomePage() {
           Next
         </button>
       </div>
-      <JobList jobs={jobs} />
+      <JobList jobs={jobs.items} />
     </div>
   );
 }
