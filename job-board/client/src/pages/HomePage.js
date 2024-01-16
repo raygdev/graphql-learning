@@ -17,6 +17,11 @@ function HomePage() {
       <h1 className="title">
         Job Board
       </h1>
+      <div>
+        <button>Previous</button>
+        <span> 1 </span>
+        <button>Next</button>
+      </div>
       <JobList jobs={jobs} />
     </div>
   );
