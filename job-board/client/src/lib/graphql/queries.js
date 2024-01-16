@@ -16,7 +16,7 @@ const authLink = new ApolloLink((operation, forward) => {
   return forward(operation)
 })
 
-const apolloClient = new ApolloClient({
+export const apolloClient = new ApolloClient({
   cache: new InMemoryCache(),
   link: concat(authLink, httpLink)
 })
@@ -54,6 +54,20 @@ const jobDetailsFragment = gql`
         }
   }
 `
+export const companyByIdQuery = gql`
+    query($id: ID!) {
+      company(id: $id) {
+        id
+        name
+        description
+        jobs {
+          id
+          date
+          title
+        }
+      }
+    }
+  `
 
 const jobByIdQuery = gql`
     query ($id: ID!){
