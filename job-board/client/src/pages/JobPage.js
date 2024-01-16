@@ -5,9 +5,15 @@ import { useJob } from '../lib/graphql/hooks';
 
 function JobPage() {
   const { jobId } = useParams();
+  const { job, loading, error } = useJob(jobId)
 
+  if(loading) {
+    return <div>...Loading</div>
+  }
 
-  // const job = jobs.find((job) => job.id === jobId);
+  if(error) {
+    return <div className='has-text-danger'>Something went wrong</div>
+  }
   return (
     <div>
       <h1 className="title is-2">
