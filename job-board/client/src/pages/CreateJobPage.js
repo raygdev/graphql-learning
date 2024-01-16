@@ -25,6 +25,10 @@ function CreateJobPage() {
     navigate(`/jobs/${job.id}`)
   };
 
+  if(error) {
+    return <div className='has-text-danger'>Something went wrong</div>
+  }
+
   return (
     <div>
       <h1 className="title">
