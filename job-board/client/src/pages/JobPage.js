@@ -17,19 +17,19 @@ function JobPage() {
   return (
     <div>
       <h1 className="title is-2">
-        {job?.title}
+        {job.title}
       </h1>
       <h2 className="subtitle is-4">
-        <Link to={`/companies/${job?.company?.id}`}>
-          {job?.company?.name}
+        <Link to={`/companies/${job.company.id}`}>
+          {job.company.name}
         </Link>
       </h2>
       <div className="box">
         <div className="block has-text-grey">
-          Posted: {job && formatDate(job?.date, 'long')}
+          Posted: {formatDate(job.date, 'long')}
         </div>
         <p className="block">
-          {job?.description}
+          {job.description}
         </p>
       </div>
     </div>
