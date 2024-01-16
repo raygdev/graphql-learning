@@ -266,8 +266,7 @@ const JobDetailsFragment = gql`
 `
 ```
 
-You then pass the fragment name `JobDetail` to the query you need to
-use the fields in.
+You then pass the fragment name `JobDetail` to the query you need to use the fields in.
 
 ```js
 const JobByIdQuery = gql`
@@ -281,5 +280,57 @@ const JobByIdQuery = gql`
 ```
 
 The variable `jobDetailsFragment` is passed to the template
-literal after the query object and before the closing template
-literal backtick.
+literal after the query object and before the closing template literal backtick.
+
+## Setting up a GraphQL server with ApolloServer
+
+```js
+import { ApolloServer } from "@apollo/server"
+import { expressMiddleware as apolloMiddleware } from "@apollo/server/express4"
+```
+Start by importing `ApolloServer` and `expressMiddleware`.
+
+```js
+const apolloServer = new ApolloServer({ typeDefs, resolvers })
+```
+
+Create an instance of `ApolloServer` and pass the configuration object
+with they `typeDefs`, which is a read file, and `resolvers` which is an
+object exported from a file. 
+
+We need to import  two things for this to work.
+
+```js
+import { resolvers } from "./resolvers.js"
+import { readFile } from "node:fs/promises"
+```
+
+the `readFile` function will read the contents from the `schema.graphql` file and use those contents as the `typeDef` value.
+
+```js
+//provide the path to the schema file and the character encoding.
+const typeDefs = await readFile('./schema.graphql', 'utf8')
+```
+
+Next we have to start the `apolloServer`
+
+```js
+await apolloServer.start()
+```
+
+After the server starts we will pass it to `app.use` and create an
+enpoint for the graphql requests
+
+```js
+app.use("/graphql", apolloMiddleware(apolloServer))
+
+//then listen for requests on the specified port
+app.listen({ port: PORT }, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log(`GraphQL endpoint: http://localhost:${PORT}/graphql`)
+});
+```
+
+Assuming that the schema has been built and resolvers have been made,
+the server is now up and running and able to recieve requests and send
+responses. Refer to [API Reference: expressMiddleware](https://www.apollographql.com/docs/apollo-server/api/express-middleware/) for further information and configuration of express middleware for apollo server.
