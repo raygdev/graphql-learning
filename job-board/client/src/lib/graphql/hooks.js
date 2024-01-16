@@ -16,6 +16,8 @@ export function useCompany(id) {
   }
 
   export function useJobs() {
-    const { data, loading, error } = useQuery(getJobsQuery)
+    const { data, loading, error } = useQuery(getJobsQuery, {
+        fetchPolicy: "network-only"
+    })
     return { jobs: data?.jobs, loading, error: Boolean(error)}
   }
