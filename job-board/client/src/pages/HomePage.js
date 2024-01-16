@@ -20,9 +20,13 @@ function HomePage() {
         Job Board
       </h1>
       <div>
-        <button>Previous</button>
-        <span> 1 </span>
-        <button>Next</button>
+        <button onClick={() => setCurrentPage(currentPage - 1)}>
+          Previous
+        </button>
+        <span> {currentPage} </span>
+        <button onClick={() => setCurrentPage(currentPage + 1)}>
+          Next
+        </button>
       </div>
       <JobList jobs={jobs} />
     </div>
