@@ -82,7 +82,7 @@ export const getJobsQuery = gql`
   }
   `
 
-const jobByIdQuery = gql`
+export const jobByIdQuery = gql`
     query ($id: ID!){
       job(id: $id) {
        ...JobDetail
