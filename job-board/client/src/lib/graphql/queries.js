@@ -68,6 +68,19 @@ export const companyByIdQuery = gql`
       }
     }
   `
+export const getJobsQuery = gql`
+  query {
+    jobs {
+      id
+      date
+      title
+      company {
+        id
+        name
+      }
+    }
+  }
+  `
 
 const jobByIdQuery = gql`
     query ($id: ID!){
