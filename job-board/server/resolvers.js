@@ -5,8 +5,8 @@ import { getJob, getJobs, getJobsByCompany, createJob, deleteJob, updateJob } fr
 export const resolvers = {
     Query: {
         //resolvers should match the structure of the defined type
-        jobs: async () => {
-            const jobs = await getJobs()
+        jobs: async (_root, { limit }) => {
+            const jobs = await getJobs(limit)
             return jobs
         },
         //first argument is root, not used here. Second argument is arguments object
