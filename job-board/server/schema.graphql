@@ -1,7 +1,12 @@
 type Query {
-    jobs(limit: Int, offset: Int): [Job!] # syntax for passing array (Add array brackets around value)
+    jobs(limit: Int, offset: Int): JobSubListj # syntax for passing array (Add array brackets around value)
     job(id: ID!): Job # pass id as variable to look for specific job
     company(id:ID!): Company
+}
+
+type JobSubList {
+    jobs:[Job!]!
+    totalCount: Int!
 }
 
 type Mutation {
