@@ -1,8 +1,10 @@
 import JobList from '../components/JobList';
 import { useJobs } from '../lib/graphql/hooks';
 
+const JOBS_PER_PAGE = 5
+
 function HomePage() {
-  const { jobs, loading, error } = useJobs()
+  const { jobs, loading, error } = useJobs(JOBS_PER_PAGE, 0)
   if(loading) {
     return <div>...Loading</div>
   }
