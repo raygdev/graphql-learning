@@ -23,7 +23,9 @@ function HomePage() {
         Job Board
       </h1>
       <div>
-        <button onClick={() => setCurrentPage(currentPage - 1)}>
+        <button
+          disabled={currentPage === 1}
+          onClick={() => setCurrentPage(currentPage - 1)}>
           Previous
         </button>
         <span> {currentPage} </span>
