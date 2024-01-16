@@ -1,15 +1,16 @@
 import { GraphQLError } from "graphql"
 import { getCompany } from "./db/companies.js"
-import { getJob, getJobs, getJobsByCompany, createJob, deleteJob, updateJob } from "./db/jobs.js"
+import { getJob, getJobs, getJobsByCompany, createJob, deleteJob, updateJob, countJobs } from "./db/jobs.js"
 
 export const resolvers = {
     Query: {
         //resolvers should match the structure of the defined type
         jobs: async (_root, { limit, offset }) => {
             const items = await getJobs(limit, offset)
+            const totalCount = await countJobs()
             return  {
                 items,
-                totalCount: 0
+                totalCount
             }
         },
         //first argument is root, not used here. Second argument is arguments object
