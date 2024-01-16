@@ -5,6 +5,8 @@ import { useQuery } from '@apollo/client';
 
 function CompanyPage() {
   const { companyId } = useParams();
+  const { data, loading, error } = useQuery(companyByIdQuery, {
+    variables: { id: companyId}
   })
 
   if(loading) {
@@ -14,6 +16,9 @@ function CompanyPage() {
   if(error) {
     return <div className='has-text-danger'>Data unavailable</div>
   }
+
+  const { company } = data
+
   return (
     <div>
       <h1 className="title">
