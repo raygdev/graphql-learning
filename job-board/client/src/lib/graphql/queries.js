@@ -21,26 +21,8 @@ export const apolloClient = new ApolloClient({
   link: concat(authLink, httpLink)
 })
 
-export async function getJobs() {
-    const query = gql`
-      query {
-        jobs {
-          id
-          date
-          title
-          company {
-            id
-            name
-          }
-        }
-      }
-    `
-    const result = await apolloClient.query({
-      query,
-      fetchPolicy: `network-only`
-    })
-    return result.data.jobs
-}
+//these queries and fragments are used with 
+//ApolloProvider and hooks from @apollo/client
 
 const jobDetailsFragment = gql`
   fragment JobDetail on Job {
@@ -54,6 +36,7 @@ const jobDetailsFragment = gql`
         }
   }
 `
+
 export const companyByIdQuery = gql`
     query($id: ID!) {
       company(id: $id) {
@@ -68,6 +51,7 @@ export const companyByIdQuery = gql`
       }
     }
   `
+  
 export const getJobsQuery = gql`
   query {
     jobs {
@@ -99,7 +83,9 @@ export const createJobMutation = gql`
     }
     ${jobDetailsFragment}
   `
-  
+
+// these functions are used with client directly
+
 export async function getJob(id) {
   const result = await apolloClient.query({
     query: jobByIdQuery,
@@ -151,4 +137,25 @@ export async function createJob({ title, description }) {
     }
   })
   return result.data.job
+}
+
+export async function getJobs() {
+  const query = gql`
+    query {
+      jobs {
+        id
+        date
+        title
+        company {
+          id
+          name
+        }
+      }
+    }
+  `
+  const result = await apolloClient.query({
+    query,
+    fetchPolicy: `network-only`
+  })
+  return result.data.jobs
 }
