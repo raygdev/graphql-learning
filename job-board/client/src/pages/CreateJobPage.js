@@ -58,7 +58,8 @@ function CreateJobPage() {
           </div>
           <div className="field">
             <div className="control">
-              <button className="button is-link" onClick={handleSubmit}>
+              <button className="button is-link" disabled={loading}
+                      onClick={handleSubmit}>
                 Submit
               </button>
             </div>
