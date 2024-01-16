@@ -8,6 +8,9 @@ export async function getJobs(limit) {
   if(limit) {
     query.limit(limit)
   }
+  if(offset) {
+    query.offset(offset)
+  }
   return await query
 }
 
