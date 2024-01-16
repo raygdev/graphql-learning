@@ -11,7 +11,16 @@ function CreateJobPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const job = await createJob({ title, description })
+    const { data: { job }} = await mutate({
+      variables: { input: { title, description } },
+      update: (cache, { data }) => {
+        cache.writeQuery({
+          query: jobByIdQuery,
+          variables: { id: data.job.id },
+          data
+        })
+      }
+    })
     console.log(job)
     navigate(`/jobs/${job.id}`)
   };
