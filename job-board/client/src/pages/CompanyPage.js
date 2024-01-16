@@ -3,11 +3,15 @@ import { companyByIdQuery } from '../lib/graphql/queries';
 import JobList from '../components/JobList';
 import { useQuery } from '@apollo/client';
 
+function useCompany(id) {
+  const { data, loading, error } = useQuery(companyByIdQuery, {
+    variables: { id }
+  })
+  return { company: data?.company, loading, error: Boolean(error)}
+}
+
 function CompanyPage() {
   const { companyId } = useParams();
-  const { data, loading, error } = useQuery(companyByIdQuery, {
-    variables: { id: companyId}
-  })
 
   if(loading) {
     return <div>Loading...</div>
