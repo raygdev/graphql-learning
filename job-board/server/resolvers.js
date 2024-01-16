@@ -6,8 +6,11 @@ export const resolvers = {
     Query: {
         //resolvers should match the structure of the defined type
         jobs: async (_root, { limit, offset }) => {
-            const jobs = await getJobs(limit, offset)
-            return jobs
+            const items = await getJobs(limit, offset)
+            return  {
+                items,
+                totalCount: 0
+            }
         },
         //first argument is root, not used here. Second argument is arguments object
         //passes the args from the defined type args.id is what we are looking for in this case
