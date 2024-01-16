@@ -12,6 +12,7 @@ function useCompany(id) {
 
 function CompanyPage() {
   const { companyId } = useParams();
+  const { company, loading, error }  = useCompany(companyId)
 
   if(loading) {
     return <div>Loading...</div>
@@ -20,8 +21,6 @@ function CompanyPage() {
   if(error) {
     return <div className='has-text-danger'>Data unavailable</div>
   }
-
-  const { company } = data
 
   return (
     <div>
