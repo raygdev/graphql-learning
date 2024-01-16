@@ -15,6 +15,8 @@ function HomePage() {
     return <div className='has-text-danger'>Something went wrong</div>
   }
   
+  const totalPages = Math.ceil(jobs.totalCount / JOBS_PER_PAGE)
+
   return (
     <div>
       <h1 className="title">
