@@ -14,3 +14,8 @@ export function useCompany(id) {
     })
     return { job: data?.job, loading, error: Boolean(error)}
   }
+
+  export function useJobs() {
+    const { data, loading, error } = useQuery(getJobsQuery)
+    return { jobs: data?.jobs, loading, error: Boolean(error)}
+  }
