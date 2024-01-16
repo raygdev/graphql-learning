@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router'
-import { createJob } from '../lib/graphql/queries';
+import { createJobMutation, jobByIdQuery } from '../lib/graphql/queries';
+import { useMutation } from '@apollo/client';
 
 function CreateJobPage() {
   const navigate = useNavigate()
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [mutate, { loading, error }] = useMutation(createJobMutation)
 
   const handleSubmit = async (event) => {
     event.preventDefault();
