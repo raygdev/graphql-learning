@@ -25,6 +25,8 @@ function getContext({ req }) {
 }
 
 const typeDefs = await readFile('./schema.graphql', 'utf8');
+const schema = makeExecutableSchema({ typeDefs, resolvers })
+
 const apolloServer = new ApolloServer({ typeDefs, resolvers });
 await apolloServer.start();
 app.use('/graphql', authMiddleware, apolloMiddleware(apolloServer, {
