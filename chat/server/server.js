@@ -1,10 +1,14 @@
 import { ApolloServer } from '@apollo/server';
 import { expressMiddleware as apolloMiddleware } from '@apollo/server/express4';
+import { makeExecutableSchema } from '@graphql-tools/schema';
 import cors from 'cors';
 import express from 'express';
 import { readFile } from 'node:fs/promises';
+import { useServer as useWsServer } from "graphql-ws/lib/use/ws"
+import { createServer as createHttpServer } from "node:http"
 import { authMiddleware, handleLogin } from './auth.js';
 import { resolvers } from './resolvers.js';
+import { WebSocketServer } from 'ws';
 
 const PORT = 9000;
 
