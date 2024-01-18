@@ -18,6 +18,12 @@ export const resolvers = {
       return createMessage(user, text);
     },
   },
+
+  Subscription: {
+    messageAdded: {
+      subscribe: () => pubSub.asyncIterator('MESSAGE_ADDED'),
+    }
+  }
 };
 
 function unauthorizedError() {
