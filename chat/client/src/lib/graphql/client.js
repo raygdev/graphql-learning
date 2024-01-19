@@ -27,3 +27,11 @@ export const apolloClient = new ApolloClient({
   link: concat(authLink, httpLink),
   cache: new InMemoryCache(),
 });
+
+function isSubscription({ query }) {
+  const definition = getMainDefinition(query)
+  return (
+    definition.kind === Kind.OPERATION_DEFINITION &&
+    definition.operation === OperationTypeNode.SUBSCRIPTION
+  )
+}
