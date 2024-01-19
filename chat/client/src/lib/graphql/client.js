@@ -5,8 +5,6 @@ import { Kind, OperationTypeNode } from 'graphql'
 import { createClient as  createWsClient } from 'graphql-ws';
 import { getAccessToken } from '../auth';
 
-const httpLink = createHttpLink({ uri: 'http://localhost:9000/graphql' });
-
 const authLink = new ApolloLink((operation, forward) => {
   const accessToken = getAccessToken();
   if (accessToken) {
@@ -24,7 +22,7 @@ const wsLink = new GraphQLWsLink(createWsClient({
 }))
 
 export const apolloClient = new ApolloClient({
-  link: concat(authLink, httpLink),
+  link: split(isSubscription, wsLink, httpLink),
   cache: new InMemoryCache(),
 });
 
