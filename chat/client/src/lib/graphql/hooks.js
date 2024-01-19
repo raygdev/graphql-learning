@@ -1,5 +1,5 @@
-import { useMutation, useQuery } from '@apollo/client';
-import { addMessageMutation, messagesQuery } from './queries';
+import { useMutation, useQuery, useSubscription } from '@apollo/client';
+import { addMessageMutation, messageAddedSubscription, messagesQuery } from './queries';
 
 export function useAddMessage() {
   const [mutate] = useMutation(addMessageMutation);
