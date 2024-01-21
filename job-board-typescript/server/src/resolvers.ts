@@ -10,6 +10,7 @@ export interface ResolverContext {
   user?: UserEntity
 }
 
+export const resolvers: Resolvers = {
   Query: {
     company: async (_root, { id }) => {
       const company = await getCompany(id);
