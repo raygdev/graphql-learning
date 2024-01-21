@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "start": "nodemon src/server.ts",
-    "codegen": "graphql-codegen --config codegen.json"
+    "codegen": "graphql-codegen --config codegen.json --watch",
+    "dev": "concurrently --names \"SERVER,CODEGEN\" -c \"bgBlue.bold,bgMagenta.bold\" \"npm:start\" \"npm:codegen\""
   },
   "dependencies": {
     "@apollo/server": "^4.9.4",
