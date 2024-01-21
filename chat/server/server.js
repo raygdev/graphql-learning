@@ -6,7 +6,7 @@ import express from 'express';
 import { readFile } from 'node:fs/promises';
 import { useServer as useWsServer } from "graphql-ws/lib/use/ws"
 import { createServer as createHttpServer } from "node:http"
-import { authMiddleware, handleLogin } from './auth.js';
+import { authMiddleware, decodeToken, handleLogin } from './auth.js';
 import { resolvers } from './resolvers.js';
 import { WebSocketServer } from 'ws';
 
