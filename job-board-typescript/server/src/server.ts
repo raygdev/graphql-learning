@@ -19,7 +19,7 @@ const typeDefs = await readFile('./schema.graphql', 'utf8');
 
 async function getContext({ req }): Promise<ResolverContext> {
   const companyLoader = createCompanyLoader();
-  const context: any = { companyLoader };
+  const context: ResolverContext = { companyLoader };
   if (req.auth) {
     context.user = await getUser(req.auth.sub);
   }
