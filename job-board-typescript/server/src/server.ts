@@ -17,7 +17,7 @@ app.post('/login', handleLogin);
 
 const typeDefs = await readFile('./schema.graphql', 'utf8');
 
-async function getContext({ req }) {
+async function getContext({ req }): Promise<ResolverContext> {
   const companyLoader = createCompanyLoader();
   const context: any = { companyLoader };
   if (req.auth) {
