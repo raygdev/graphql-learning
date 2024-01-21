@@ -5,10 +5,12 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "codegen": "graphql-codegen --config codegen.json"
+    "codegen": "graphql-codegen --config codegen.json --watch",
+    "dev": "concurrently --names \"CLIENT,CODEGEN\" -c \"bgGreen.bold,bgYellow.bold\" \"npm:start\" \"npm:codegen\""
   },
   "dependencies": {
     "@apollo/client": "^3.8.5",
+    "@parcel/watcher": "^2.4.0",
     "bulma": "^0.9.4",
     "graphql": "^16.8.1",
     "jwt-decode": "^3.1.2",
