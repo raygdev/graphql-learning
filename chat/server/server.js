@@ -24,6 +24,15 @@ function getHttpContext({ req }) {
   return {};
 }
 
+function getWsContext({ connectionParams }) {
+  const accessToken = connectionParams.accessToken
+  if(accessToken) {
+    const decoded = decodeToken(accessToken)
+    return { user: decoded.sub}
+  }
+  return {}
+}
+
 const typeDefs = await readFile('./schema.graphql', 'utf8');
 const schema = makeExecutableSchema({ typeDefs, resolvers })
 
