@@ -17,7 +17,7 @@ app.use(cors(), express.json());
 
 app.post('/login', handleLogin);
 
-function getContext({ req }) {
+function getHttpContext({ req }) {
   if (req.auth) {
     return { user: req.auth.sub };
   }
@@ -30,7 +30,7 @@ const schema = makeExecutableSchema({ typeDefs, resolvers })
 const apolloServer = new ApolloServer({ typeDefs, resolvers });
 await apolloServer.start();
 app.use('/graphql', authMiddleware, apolloMiddleware(apolloServer, {
-  context: getContext,
+  context: getHttpContext,
 }));
 
 const httpServer = createHttpServer(app)
