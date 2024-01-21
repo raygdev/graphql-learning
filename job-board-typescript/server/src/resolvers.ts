@@ -5,7 +5,11 @@ import { Resolvers } from './generated/schema.js';
 import DataLoader from 'dataloader';
 import { CompanyEntity, UserEntity } from './db/types.js';
 
-export const resolvers = {
+export interface ResolverContext {
+  companyLoader: DataLoader<string, CompanyEntity, string>,
+  user?: UserEntity
+}
+
   Query: {
     company: async (_root, { id }) => {
       const company = await getCompany(id);
