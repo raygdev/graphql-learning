@@ -33,7 +33,7 @@ const jobDetailFragment = graphql(`
   }
 `);
 
-export const companyByIdQuery = gql`
+export const companyByIdQuery = graphql(`
   query CompanyById($id: ID!) {
     company(id: $id) {
       id
@@ -46,18 +46,17 @@ export const companyByIdQuery = gql`
       }
     }
   }
-`;
+`);
 
-export const jobByIdQuery = gql`
+export const jobByIdQuery = graphql(`
   query JobById($id: ID!) {
     job(id: $id) {
       ...JobDetail
     }
   }
-  ${jobDetailFragment}
-`;
+`);
 
-export const jobsQuery = gql`
+export const jobsQuery = graphql(`
   query Jobs($limit: Int, $offset: Int) {
     jobs(limit: $limit, offset: $offset) {
       items {
@@ -72,13 +71,12 @@ export const jobsQuery = gql`
       totalCount
     }
   }
-`;
+`);
 
-export const createJobMutation = gql`
+export const createJobMutation = graphql(`
   mutation CreateJob($input: CreateJobInput!) {
     job: createJob(input: $input) {
       ...JobDetail
     }
   }
-  ${jobDetailFragment}
-`;
+`);
