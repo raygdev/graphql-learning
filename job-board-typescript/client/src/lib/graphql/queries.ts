@@ -1,5 +1,6 @@
 import { ApolloClient, ApolloLink, concat, createHttpLink, gql, InMemoryCache } from '@apollo/client';
 import { getAccessToken } from '../auth';
+import { graphql } from "../../generated/gql"
 
 const httpLink = createHttpLink({ uri: 'http://localhost:9000/graphql' });
 
