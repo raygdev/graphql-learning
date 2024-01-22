@@ -19,7 +19,8 @@ export const apolloClient = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-const jobDetailFragment = gql`
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const jobDetailFragment = graphql(`
   fragment JobDetail on Job {
     id
     date
@@ -30,7 +31,7 @@ const jobDetailFragment = gql`
     }
     description
   }
-`;
+`);
 
 export const companyByIdQuery = gql`
   query CompanyById($id: ID!) {
